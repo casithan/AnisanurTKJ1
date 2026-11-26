@@ -1,0 +1,1194 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Materi Kabel LAN (UTP & RJ45) - TKJ SMK Banjar Asri</title>
+  <!-- Load Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Load Font Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* Pola garis-garis diagonal untuk kabel UTP putih-warna agar tampak realistis */
+    .wire-putih-oranye {
+      background: repeating-linear-gradient(
+        -45deg,
+        #ffffff,
+        #ffffff 4px,
+        #f97316 4px,
+        #f97316 8px
+      );
+    }
+    .wire-oranye {
+      background: #f97316;
+    }
+    .wire-putih-hijau {
+      background: repeating-linear-gradient(
+        -45deg,
+        #ffffff,
+        #ffffff 4px,
+        #22c55e 4px,
+        #22c55e 8px
+      );
+    }
+    .wire-hijau {
+      background: #22c55e;
+    }
+    .wire-putih-biru {
+      background: repeating-linear-gradient(
+        -45deg,
+        #ffffff,
+        #ffffff 4px,
+        #2563eb 4px,
+        #2563eb 8px
+      );
+    }
+    .wire-biru {
+      background: #2563eb;
+    }
+    .wire-putih-cokelat {
+      background: repeating-linear-gradient(
+        -45deg,
+        #ffffff,
+        #ffffff 4px,
+        #78350f 4px,
+        #78350f 8px
+      );
+    }
+    .wire-cokelat {
+      background: #78350f;
+    }
+    .wire-kosong {
+      background: #e2e8f0;
+    }
+
+    /* Sembunyikan scrollbar horizontal pada navigasi tab di layar kecil */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Animasi transisi antar tab */
+    .tab-content {
+      animation: fadeIn 0.25s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+  <!-- Header Biru Modern -->
+  <header class="bg-gradient-to-r from-blue-900 via-blue-700 to-sky-600 text-white shadow-lg">
+    <div class="max-w-6xl mx-auto px-4 py-7 sm:py-9">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+          <span class="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-sm border border-white/25 text-xs font-semibold px-3 py-1 rounded-full mb-3 tracking-wide uppercase">
+            <svg class="w-3.5 h-3.5 text-sky-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 002.25-2.25V6.75a2.25 2.25 0 00-2.25-2.25H6.75A2.25 2.25 0 004.5 6.75v10.5a2.25 2.25 0 002.25 2.25z" />
+            </svg>
+            Modul Praktikum Jaringan Dasar
+          </span>
+          <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight leading-tight">
+            Materi Kabel LAN (UTP &amp; RJ45) - TKJ SMK Banjar Asri
+          </h1>
+          <p class="mt-2 text-blue-100 text-sm sm:text-base max-w-2xl">
+            Media pembelajaran interaktif pengkabelan jaringan lokal, standar warna EIA/TIA-568, simulasi crimping RJ45, dan evaluasi pemahaman siswa.
+          </p>
+        </div>
+        <div class="hidden lg:flex items-center gap-3 bg-white/10 border border-white/20 rounded-2xl p-4 backdrop-blur-sm">
+          <div class="w-12 h-12 rounded-xl bg-sky-400/20 flex items-center justify-center text-sky-200">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
+            </svg>
+          </div>
+          <div>
+            <p class="text-xs text-blue-200 uppercase font-semibold">Kompetensi Keahlian</p>
+            <p class="font-bold text-white text-sm">Teknik Komputer &amp; Jaringan</p>
+            <p class="text-xs text-sky-200">SMK Banjar Asri</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigasi Tab Sticky -->
+  <nav class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex overflow-x-auto no-scrollbar gap-2 py-3" id="tab-nav">
+        <button onclick="switchTab('tab-pengenalan', this)" class="tab-btn active whitespace-nowrap px-4 py-2.5 rounded-xl text-sm font-semibold transition-all bg-blue-700 text-white shadow-sm">
+          1. Pengenalan &amp; Alat Crimping
+        </button>
+        <button onclick="switchTab('tab-standar', this)" class="tab-btn whitespace-nowrap px-4 py-2.5 rounded-xl text-sm font-semibold transition-all bg-slate-100 text-slate-600 hover:bg-slate-200">
+          2. Standar Warna T568A &amp; T568B
+        </button>
+        <button onclick="switchTab('tab-perbandingan', this)" class="tab-btn whitespace-nowrap px-4 py-2.5 rounded-xl text-sm font-semibold transition-all bg-slate-100 text-slate-600 hover:bg-slate-200">
+          3. Straight-Through vs Cross-Over
+        </button>
+        <button onclick="switchTab('tab-simulasi', this)" class="tab-btn whitespace-nowrap px-4 py-2.5 rounded-xl text-sm font-semibold transition-all bg-slate-100 text-slate-600 hover:bg-slate-200">
+          4. Simulasi Susun Kabel
+        </button>
+        <button onclick="switchTab('tab-kuis', this)" class="tab-btn whitespace-nowrap px-4 py-2.5 rounded-xl text-sm font-semibold transition-all bg-slate-100 text-slate-600 hover:bg-slate-200">
+          5. Latihan Kuis TKJ
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Konten Utama -->
+  <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-6 sm:py-8">
+
+    <!-- ========================================================= -->
+    <!-- TAB 1: PENGENALAN & ALAT CRIMPING -->
+    <!-- ========================================================= -->
+    <section id="tab-pengenalan" class="tab-content space-y-6">
+      <div class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+        <div class="flex items-start gap-4">
+          <div class="p-3 bg-blue-100 text-blue-700 rounded-xl shrink-0">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+            </svg>
+          </div>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-bold text-slate-900">Apa Itu Kabel UTP &amp; Konektor RJ45?</h2>
+            <p class="mt-2 text-slate-600 leading-relaxed">
+              Dalam praktikum Teknik Komputer dan Jaringan (TKJ) di <strong>SMK Banjar Asri</strong>, media transmisi kabel yang paling sering digunakan untuk membangun <em>Local Area Network</em> (LAN) adalah kabel <strong>UTP (Unshielded Twisted Pair)</strong>. Kabel ini berisi 8 helai kawat tembaga (4 pasang kabel yang saling dipilin) tanpa pelindung aluminium foil di bagian dalamnya.
+            </p>
+            <div class="mt-4 bg-blue-50 border-l-4 border-blue-600 p-4 rounded-r-xl text-sm text-blue-900">
+              <strong>Mengapa kabel di dalamnya dipilin (Twisted)?</strong> Pemilinan pasangan kabel bertujuan meredam interferensi elektromagnetik (EMI) dari luar serta mengurangi gangguan sinyal antar kabel (<em>crosstalk</em>).
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid Peralatan Praktikum Crimping -->
+      <div>
+        <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+          <span class="w-2 h-6 bg-blue-600 rounded-full"></span>
+          Alat dan Bahan Praktikum Crimping Kabel LAN
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- Item 1 -->
+          <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm hover:shadow-md transition-shadow">
+            <div class="w-11 h-11 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center font-bold mb-3">
+              UTP
+            </div>
+            <h4 class="font-bold text-slate-900">1. Kabel UTP (Cat5e / Cat6)</h4>
+            <p class="text-sm text-slate-600 mt-1.5">
+              Berisi 4 pasang warna (Oranye, Hijau, Biru, Cokelat). Cat5e mendukung hingga 1 Gbps, sedangkan Cat6 hingga 10 Gbps jarak pendek.
+            </p>
+          </div>
+          <!-- Item 2 -->
+          <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm hover:shadow-md transition-shadow">
+            <div class="w-11 h-11 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold mb-3">
+              RJ45
+            </div>
+            <h4 class="font-bold text-slate-900">2. Konektor RJ45</h4>
+            <p class="text-sm text-slate-600 mt-1.5">
+              Konektor plastik bening dengan 8 pin tembaga di bagian ujung untuk menghubungkan kabel UTP ke port NIC komputer, switch, atau router.
+            </p>
+          </div>
+          <!-- Item 3 -->
+          <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm hover:shadow-md transition-shadow">
+            <div class="w-11 h-11 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold mb-3">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z" />
+              </svg>
+            </div>
+            <h4 class="font-bold text-slate-900">3. Tang Crimping</h4>
+            <p class="text-sm text-slate-600 mt-1.5">
+              Alat utama untuk memotong kabel, mengupas jaket pelindung luar kabel UTP, dan menjepit pin tembaga konektor RJ45 agar mengunci.
+            </p>
+          </div>
+          <!-- Item 4 -->
+          <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm hover:shadow-md transition-shadow">
+            <div class="w-11 h-11 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold mb-3">
+              TEST
+            </div>
+            <h4 class="font-bold text-slate-900">4. LAN Cable Tester</h4>
+            <p class="text-sm text-slate-600 mt-1.5">
+              Alat penguji koneksi urutan pin 1 hingga 8 melalui indikator lampu LED untuk memastikan tidak ada pin yang putus atau tertukar.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Langkah Singkat Crimping -->
+      <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+        <h3 class="text-lg font-bold text-slate-900 mb-3">Prosedur Standar Crimping di Lab TKJ</h3>
+        <ol class="grid grid-cols-1 md:grid-cols-5 gap-3 text-sm">
+          <li class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+            <span class="font-bold text-blue-700 block mb-1">Langkah 1</span>
+            Kupas kulit luar kabel UTP sekitar 2 cm menggunakan pisau pengupas pada tang crimping.
+          </li>
+          <li class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+            <span class="font-bold text-blue-700 block mb-1">Langkah 2</span>
+            Pisahkan pilinan 8 kabel dan luruskan sesuai standar warna (T568A atau T568B).
+          </li>
+          <li class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+            <span class="font-bold text-blue-700 block mb-1">Langkah 3</span>
+            Potong ujung ke-8 kabel secara rata menggunakan pemotong tang crimping (sisa ± 1,2 cm).
+          </li>
+          <li class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+            <span class="font-bold text-blue-700 block mb-1">Langkah 4</span>
+            Masukkan ke konektor RJ45 (pengunci menghadap bawah) hingga ujung tembaga menyentuh ujung pin.
+          </li>
+          <li class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+            <span class="font-bold text-blue-700 block mb-1">Langkah 5</span>
+            Jepit kuat dengan tang crimping hingga berbunyi "klik", lalu uji dengan LAN Tester.
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- TAB 2: STANDAR WARNA T568A & T568B -->
+    <!-- ========================================================= -->
+    <section id="tab-standar" class="tab-content hidden space-y-6">
+      <div class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+          <div>
+            <h2 class="text-xl sm:text-2xl font-bold text-slate-900">Standar Urutan Warna EIA/TIA-568A &amp; 568B</h2>
+            <p class="text-slate-600 text-sm sm:text-base mt-1">
+              Cara membaca urutan Pin 1 sampai 8: Posisikan bagian <strong>kuningan/pin tembaga menghadap ke atas/wajah Anda</strong> dan pengunci plastik (klip) berada di belakang. Pin 1 dimulai dari paling kiri.
+            </p>
+          </div>
+          <span class="inline-flex items-center px-3.5 py-1.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 text-xs font-semibold shrink-0">
+            Catatan: T568B paling umum digunakan di Indonesia
+          </span>
+        </div>
+
+        <!-- Tabel Urutan Warna Pin 1-8 -->
+        <div class="overflow-x-auto rounded-xl border border-slate-200">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-slate-100 text-slate-700 text-xs sm:text-sm uppercase tracking-wider border-b border-slate-200">
+                <th class="py-3.5 px-4 font-bold">No. Pin</th>
+                <th class="py-3.5 px-4 font-bold">Standar T568A</th>
+                <th class="py-3.5 px-4 font-bold">Standar T568B</th>
+                <th class="py-3.5 px-4 font-bold">Fungsi Sinyal (10/100Base-T)</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 text-sm">
+              <!-- Pin 1 -->
+              <tr class="hover:bg-slate-50">
+                <td class="py-3 px-4 font-bold text-slate-900">Pin 1</td>
+                <td class="py-3 px-4">
+                  <span class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-green-50 border border-green-300 text-green-900 font-semibold text-xs sm:text-sm">
+                    <span class="w-5 h-3.5 rounded border border-slate-400 wire-putih-hijau inline-block"></span>
+                    Putih - Hijau
+                  </span>
+                </td>
+                <td class="py-3 px-4">
+                  <span class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-orange-50 border border-orange-300 text-orange-900 font-semibold text-xs sm:text-sm">
+                    <span class="w-5 h-3.5 rounded border border-slate-400 wire-putih-oranye inline-block"></span>
+                    Putih - Oranye
+                  </span>
+                </td>
+                <td class="py-3 px-4 text-slate-600 font-mono text-xs">TX+ (Transmit Data +)</td>
+              </tr>
+              <!-- Pin 2 -->
+              <tr class="hover:bg-slate-50">
+                <td class="py-3 px-4 font-bold text-slate-900">Pin 2</td>
+                <td class="py-3 px-4">
+                  <span class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-green-600 text-white font-semibold text-xs sm:text-sm shadow-xs">
+                    <span class="w-5 h-3.5 rounded border border-white/60 wire-hijau inline-block"></span>
+                    Hijau
+                  </span>
+                </td>
+                <td class="py-3 px-4">
+                  <span class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-orange-500 text-white font-semibold text-xs sm:text-sm shadow-xs">
+                    <span class="w-5 h-3.5 rounded border border-white/60 wire-oranye inline-block"></span>
+                    Oranye
+                  </span>
+                </td>
+                <td class="py-3 px-4 text-slate-600 font-mono text-xs">TX- (Transmit Data -)</td>
+              </tr>
+              <!-- Pin 3 -->
+              <tr class="hover:bg-slate-50">
+                <td class="py-3 px-4 font-bold text-slate-900">Pin 3</td>
+                <td class="py-3 px-4">
+                  <span class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-orange-50 border border-orange-300 text-orange-900 font-semibold text-xs sm:text-sm">
+                    <span class="w-5 h-3.5 rounded border border-slate-400 wire-putih-oranye inline-block"></span>
+                    Putih - Oranye
+                  </span>
+                </td>
+                <td class="py-3 px-4">
+                  <span class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-green-50 border border-green-300 text-green-900 font-semibold text-xs sm:text-sm">
+                    <span class="w-5 h-3.5 rounded border border-slate-400 wire-putih-hijau inline-block"></span>
+                    Putih - Hijau
+                  </span>
+                </td>
+                <td class="py-3 px-4 text-slate-600 font-mono text-xs">RX+ (Receive Data +)</td>
+              </tr>
+              <!-- Pin 4 -->
+              <tr class="hover:bg-slate-50">
+                <td class="py-3 px-4 font-bold text-slate-900">Pin 4</td>
+                <td class="py-3 px-4">
+                  <span class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-blue-600 text-white font-semibold text-xs sm:text-sm shadow-xs">
+                    <span class="w-5 h-3.5 rounded border border-white/60 wire-biru inline-block"></span>
+                    Biru
+                  </span>
+                </td>
+                <td class="py-3 px-4">
+                  <span class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-blue-600 text-white font-semibold text-xs sm:text-sm shadow-xs">
+                    <span class="w-5 h-3.5 rounded border border-white/60 wire-biru inline-block"></span>
+                    Biru
+                  </span>
+                </td>
+                <td class="py-3 px-4 text-slate-600 font-mono text-xs">Bi-directional / PoE</td>
+              </tr>
+              <!-- Pin 5 -->
+              <tr class="hover:bg-slate-50">
+                <td class="py-3 px-4 font-bold text-slate-900">Pin 5</td>
+                <td class="py-3 px-4">
+                  <span class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-blue-50 border border-blue-300 text-blue-900 font-semibold text-xs sm:text-sm">
+                    <span class="w-5 h-3.5 rounded border border-slate-400 wire-putih-biru inline-block"></span>
+                    Putih - Biru
+                  </span>
+                </td>
+                <td class="py-3 px-4">
+                  <span class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-blue-50 border border-blue-300 text-blue-900 font-semibold text-xs sm:text-sm">
+                    <span class="w-5 h-3.5 rounded border border-slate-400 wire-putih-biru inline-block"></span>
+                    Putih - Biru
+                  </span>
+                </td>
+                <td class="py-3 px-4 text-slate-600 font-mono text-xs">Bi-directional / PoE</td>
+              </tr>
+              <!-- Pin 6 -->
+              <tr class="hover:bg-slate-50">
+                <td class="py-3 px-4 font-bold text-slate-900">Pin 6</td>
+                <td class="py-3 px-4">
+                  <span class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-orange-500 text-white font-semibold text-xs sm:text-sm shadow-xs">
+                    <span class="w-5 h-3.5 rounded border border-white/60 wire-oranye inline-block"></span>
+                    Oranye
+                  </span>
+                </td>
+                <td class="py-3 px-4">
+                  <span class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-green-600 text-white font-semibold text-xs sm:text-sm shadow-xs">
+                    <span class="w-5 h-3.5 rounded border border-white/60 wire-hijau inline-block"></span>
+                    Hijau
+                  </span>
+                </td>
+                <td class="py-3 px-4 text-slate-600 font-mono text-xs">RX- (Receive Data -)</td>
+              </tr>
+              <!-- Pin 7 -->
+              <tr class="hover:bg-slate-50">
+                <td class="py-3 px-4 font-bold text-slate-900">Pin 7</td>
+                <td class="py-3 px-4">
+                  <span class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-amber-50 border border-amber-400 text-amber-950 font-semibold text-xs sm:text-sm">
+                    <span class="w-5 h-3.5 rounded border border-slate-400 wire-putih-cokelat inline-block"></span>
+                    Putih - Cokelat
+                  </span>
+                </td>
+                <td class="py-3 px-4">
+                  <span class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-amber-50 border border-amber-400 text-amber-950 font-semibold text-xs sm:text-sm">
+                    <span class="w-5 h-3.5 rounded border border-slate-400 wire-putih-cokelat inline-block"></span>
+                    Putih - Cokelat
+                  </span>
+                </td>
+                <td class="py-3 px-4 text-slate-600 font-mono text-xs">Bi-directional / PoE</td>
+              </tr>
+              <!-- Pin 8 -->
+              <tr class="hover:bg-slate-50">
+                <td class="py-3 px-4 font-bold text-slate-900">Pin 8</td>
+                <td class="py-3 px-4">
+                  <span class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-amber-900 text-white font-semibold text-xs sm:text-sm shadow-xs">
+                    <span class="w-5 h-3.5 rounded border border-white/60 wire-cokelat inline-block"></span>
+                    Cokelat
+                  </span>
+                </td>
+                <td class="py-3 px-4">
+                  <span class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-amber-900 text-white font-semibold text-xs sm:text-sm shadow-xs">
+                    <span class="w-5 h-3.5 rounded border border-white/60 wire-cokelat inline-block"></span>
+                    Cokelat
+                  </span>
+                </td>
+                <td class="py-3 px-4 text-slate-600 font-mono text-xs">Bi-directional / PoE</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mt-5 p-4 rounded-xl bg-slate-100 text-sm text-slate-700">
+          <strong>Tips Menghafal Cepat:</strong> Perbedaan antara <strong>T568A</strong> dan <strong>T568B</strong> hanya terletak pada penukaran posisi pasangan <strong>Hijau (Pin 1 &amp; 2)</strong> dengan <strong>Oranye (Pin 3 &amp; 6)</strong>. Sedangkan Pin 4, 5, 7, dan 8 posisinya selalu sama!
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- TAB 3: PERBANDINGAN STRAIGHT-THROUGH VS CROSS-OVER -->
+    <!-- ========================================================= -->
+    <section id="tab-perbandingan" class="tab-content hidden space-y-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Kartu Straight-Through -->
+        <div class="bg-white rounded-2xl border-2 border-blue-200 p-6 sm:p-7 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="px-3 py-1 rounded-full bg-blue-100 text-blue-800 text-xs font-bold uppercase">Tipe 1</span>
+              <span class="text-xs font-semibold text-slate-500">Ujung A = Ujung B</span>
+            </div>
+            <h2 class="text-2xl font-extrabold text-blue-900">Kabel Straight-Through</h2>
+            <p class="mt-2 text-slate-600 text-sm leading-relaxed">
+              Kabel jaringan yang memiliki urutan warna <strong>sama persis</strong> pada kedua ujung konektor RJ45-nya (umumnya <strong>T568B — T568B</strong>, atau T568A — T568A).
+            </p>
+
+            <!-- Diagram Visual Straight -->
+            <div class="my-5 p-4 rounded-xl bg-blue-50 border border-blue-100">
+              <p class="text-xs font-bold text-blue-800 uppercase mb-2 text-center">Skema Koneksi Pin</p>
+              <div class="flex items-center justify-between text-xs font-mono font-bold text-slate-700 bg-white p-3 rounded-lg border border-blue-200">
+                <div class="text-center">
+                  <div class="text-blue-700">UJUNG A</div>
+                  <div class="mt-1">T568B</div>
+                  <div class="text-[11px] text-slate-400">Pin 1, 2, 3, 6</div>
+                </div>
+                <div class="flex-1 px-3 flex flex-col items-center">
+                  <span class="text-[10px] text-blue-600 mb-0.5">Lurus (1-1, 2-2, 3-3, 6-6)</span>
+                  <div class="w-full h-0.5 bg-blue-500"></div>
+                </div>
+                <div class="text-center">
+                  <div class="text-blue-700">UJUNG B</div>
+                  <div class="mt-1">T568B</div>
+                  <div class="text-[11px] text-slate-400">Pin 1, 2, 3, 6</div>
+                </div>
+              </div>
+            </div>
+
+            <h3 class="font-bold text-slate-900 text-sm mb-2">Digunakan untuk Perangkat Berbeda Jenis:</h3>
+            <ul class="space-y-2 text-sm text-slate-700">
+              <li class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+                Komputer (PC / Laptop) ke Switch atau Hub
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+                Router ke Switch atau Hub
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+                Switch ke Server / Access Point
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Kartu Cross-Over -->
+        <div class="bg-white rounded-2xl border-2 border-emerald-200 p-6 sm:p-7 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold uppercase">Tipe 2</span>
+              <span class="text-xs font-semibold text-slate-500">Ujung A ≠ Ujung B</span>
+            </div>
+            <h2 class="text-2xl font-extrabold text-emerald-900">Kabel Cross-Over</h2>
+            <p class="mt-2 text-slate-600 text-sm leading-relaxed">
+              Kabel jaringan yang memiliki susunan warna <strong>berbeda/menyilang</strong> antara kedua ujung konektornya, yaitu ujung pertama menggunakan <strong>T568A</strong> dan ujung lainnya menggunakan <strong>T568B</strong>.
+            </p>
+
+            <!-- Diagram Visual Cross -->
+            <div class="my-5 p-4 rounded-xl bg-emerald-50 border border-emerald-100">
+              <p class="text-xs font-bold text-emerald-800 uppercase mb-2 text-center">Skema Koneksi Pin</p>
+              <div class="flex items-center justify-between text-xs font-mono font-bold text-slate-700 bg-white p-3 rounded-lg border border-emerald-200">
+                <div class="text-center">
+                  <div class="text-emerald-700">UJUNG A</div>
+                  <div class="mt-1">T568A</div>
+                  <div class="text-[11px] text-slate-400">Pin 1, 2, 3, 6</div>
+                </div>
+                <div class="flex-1 px-3 flex flex-col items-center">
+                  <span class="text-[10px] text-emerald-600 mb-0.5">Silang (1↔3, 2↔6)</span>
+                  <div class="w-full h-0.5 bg-emerald-500 border-dashed"></div>
+                </div>
+                <div class="text-center">
+                  <div class="text-emerald-700">UJUNG B</div>
+                  <div class="mt-1">T568B</div>
+                  <div class="text-[11px] text-slate-400">Pin 3, 6, 1, 2</div>
+                </div>
+              </div>
+            </div>
+
+            <h3 class="font-bold text-slate-900 text-sm mb-2">Digunakan untuk Perangkat Sejenis:</h3>
+            <ul class="space-y-2 text-sm text-slate-700">
+              <li class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+                Komputer (PC) ke Komputer (PC) secara langsung
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+                Switch ke Switch / Hub ke Hub
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+                Router ke Router atau Router ke PC langsung
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabel Ringkasan Perbandingan -->
+      <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+        <h3 class="text-lg font-bold text-slate-900 mb-3">Ringkasan Perbedaan Utama</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm text-left border-collapse">
+            <thead>
+              <tr class="bg-slate-100 border-b border-slate-200 text-slate-700">
+                <th class="py-3 px-4 font-bold">Aspek</th>
+                <th class="py-3 px-4 font-bold text-blue-800">Straight-Through</th>
+                <th class="py-3 px-4 font-bold text-emerald-800">Cross-Over</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200">
+              <tr>
+                <td class="py-3 px-4 font-semibold">Susunan Konektor</td>
+                <td class="py-3 px-4">T568B — T568B (atau T568A — T568A)</td>
+                <td class="py-3 px-4">T568A — T568B</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-semibold">Jalur TX &amp; RX</td>
+                <td class="py-3 px-4">TX terhubung ke TX, RX terhubung ke RX</td>
+                <td class="py-3 px-4">TX (Pin 1,2) menyilang ke RX (Pin 3,6)</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-semibold">Hasil LAN Tester</td>
+                <td class="py-3 px-4">Lampu 1–8 menyala berurutan bersamaan (1-1, 2-2, ..., 8-8)</td>
+                <td class="py-3 px-4">Lampu menyilang: 1→3, 2→6, 3→1, 4→4, 5→5, 6→2, 7→7, 8→8</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- TAB 4: SIMULASI SUSUN KABEL INTERAKTIF -->
+    <!-- ========================================================= -->
+    <section id="tab-simulasi" class="tab-content hidden space-y-6">
+      <div class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-slate-200">
+          <div>
+            <h2 class="text-xl sm:text-2xl font-bold text-slate-900">Simulasi Susun Kabel Konektor RJ45</h2>
+            <p class="text-slate-600 text-sm mt-1">
+              Klik warna kabel pada palet di bawah untuk mengisi slot <strong>Pin 1 sampai Pin 8</strong> secara berurutan, atau klik slot pin tertentu untuk mengubahnya.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <button onclick="resetSimulation()" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs sm:text-sm transition">
+              Reset Kabel
+            </button>
+            <button onclick="autoFillStandard('T568A')" class="px-4 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 font-semibold text-xs sm:text-sm transition">
+              Isi Contoh T568A
+            </button>
+            <button onclick="autoFillStandard('T568B')" class="px-4 py-2 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-800 border border-blue-200 font-semibold text-xs sm:text-sm transition">
+              Isi Contoh T568B
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-6 items-start">
+          <!-- Kolom Kiri: Palet Pilihan 8 Warna Kabel UTP -->
+          <div class="lg:col-span-5 space-y-4">
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+              <div class="flex items-center justify-between mb-3">
+                <h3 class="font-bold text-slate-800 text-sm">1. Pilih Warna Kabel UTP:</h3>
+                <span id="active-slot-badge" class="text-xs font-bold px-2.5 py-1 rounded-lg bg-blue-100 text-blue-800">
+                  Target: Pin 1
+                </span>
+              </div>
+              <div id="wire-palette" class="grid grid-cols-2 gap-2.5">
+                <!-- Diisi melalui JS -->
+              </div>
+              <p class="text-xs text-slate-500 mt-3">
+                *Setiap warna kabel UTP hanya dapat digunakan 1 kali dalam satu konektor RJ45.
+              </p>
+            </div>
+
+            <!-- Tombol Cek Hasil Crimping -->
+            <button onclick="checkCrimpResult()" class="w-full py-3.5 px-6 rounded-xl bg-blue-700 hover:bg-blue-800 text-white font-bold text-sm sm:text-base shadow-md hover:shadow-lg transition flex items-center justify-center gap-2">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              Cek Susunan &amp; Crimping RJ45
+            </button>
+
+            <!-- Kotak Feedback Hasil Pengecekan -->
+            <div id="sim-feedback" class="hidden p-4 rounded-2xl border text-sm"></div>
+          </div>
+
+          <!-- Kolom Kanan: Visualisasi Konektor RJ45 & Kabel UTP -->
+          <div class="lg:col-span-7 flex flex-col items-center">
+            <h3 class="font-bold text-slate-800 text-sm mb-3 text-center">
+              2. Tampilan Visual Konektor RJ45 (Pin Tembaga Menghadap Atas)
+            </h3>
+
+            <!-- Badan Konektor RJ45 Visual -->
+            <div class="w-full max-w-md bg-gradient-to-b from-slate-100 to-slate-200/80 border-2 border-slate-300 rounded-t-3xl rounded-b-xl p-4 sm:p-6 shadow-inner relative">
+              <!-- Bagian Ujung 8 Pin Kuningan Emas -->
+              <div class="grid grid-cols-8 gap-1.5 sm:gap-2 mb-2 px-1">
+                <div class="h-6 bg-amber-400 border border-amber-600 rounded-t-sm flex items-center justify-center text-[10px] font-extrabold text-amber-950 shadow-xs">1</div>
+                <div class="h-6 bg-amber-400 border border-amber-600 rounded-t-sm flex items-center justify-center text-[10px] font-extrabold text-amber-950 shadow-xs">2</div>
+                <div class="h-6 bg-amber-400 border border-amber-600 rounded-t-sm flex items-center justify-center text-[10px] font-extrabold text-amber-950 shadow-xs">3</div>
+                <div class="h-6 bg-amber-400 border border-amber-600 rounded-t-sm flex items-center justify-center text-[10px] font-extrabold text-amber-950 shadow-xs">4</div>
+                <div class="h-6 bg-amber-400 border border-amber-600 rounded-t-sm flex items-center justify-center text-[10px] font-extrabold text-amber-950 shadow-xs">5</div>
+                <div class="h-6 bg-amber-400 border border-amber-600 rounded-t-sm flex items-center justify-center text-[10px] font-extrabold text-amber-950 shadow-xs">6</div>
+                <div class="h-6 bg-amber-400 border border-amber-600 rounded-t-sm flex items-center justify-center text-[10px] font-extrabold text-amber-950 shadow-xs">7</div>
+                <div class="h-6 bg-amber-400 border border-amber-600 rounded-t-sm flex items-center justify-center text-[10px] font-extrabold text-amber-950 shadow-xs">8</div>
+              </div>
+
+              <!-- 8 Jalur Slot Kabel di dalam Plastik Bening RJ45 -->
+              <div id="rj45-slots" class="grid grid-cols-8 gap-1.5 sm:gap-2 bg-white/70 border border-slate-300 rounded-xl p-2 h-44 sm:h-52">
+                <!-- Diisi via JavaScript -->
+              </div>
+
+              <!-- Penjepit Plastik (Strain Relief Latch) -->
+              <div class="mt-3 mx-auto w-3/4 h-4 bg-slate-300/90 border border-slate-400 rounded-md flex items-center justify-center text-[10px] font-semibold text-slate-600">
+                Penjepit Jaket Kabel (Strain Relief)
+              </div>
+            </div>
+
+            <!-- Jaket Pelindung Luar Kabel UTP -->
+            <div class="w-40 sm:w-48 h-16 bg-gradient-to-r from-slate-600 via-slate-500 to-slate-600 rounded-b-2xl shadow-md flex flex-col items-center justify-center text-white text-xs font-mono">
+              <span>UTP CAT5e / CAT6</span>
+              <span class="text-[10px] text-slate-200">SMK BANJAR ASRI</span>
+            </div>
+
+            <!-- Keterangan Urutan Pin Terpilih -->
+            <div id="selected-summary" class="mt-4 w-full max-w-md bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-600">
+              <!-- Ringkasan urutan warna -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- TAB 5: LATIHAN KUIS TKJ -->
+    <!-- ========================================================= -->
+    <section id="tab-kuis" class="tab-content hidden space-y-6">
+      <div class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm max-w-3xl mx-auto">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-slate-200">
+          <div>
+            <h2 class="text-xl sm:text-2xl font-bold text-slate-900">Evaluasi &amp; Latihan Kuis TKJ</h2>
+            <p class="text-sm text-slate-600">Jawab seluruh soal berikut untuk mengukur pemahaman materi kabel LAN Anda.</p>
+          </div>
+          <span id="quiz-progress-badge" class="px-3 py-1.5 rounded-xl bg-blue-50 text-blue-800 font-bold text-xs self-start sm:self-auto">
+            Soal 1 dari 5
+          </span>
+        </div>
+
+        <!-- Container Soal Aktif -->
+        <div id="quiz-container" class="mt-6">
+          <div class="mb-5">
+            <span id="quiz-category" class="text-xs font-bold uppercase tracking-wider text-blue-600"></span>
+            <h3 id="quiz-question-text" class="text-lg font-bold text-slate-900 mt-1"></h3>
+          </div>
+
+          <!-- Pilihan Jawaban -->
+          <div id="quiz-options-list" class="space-y-3"></div>
+
+          <!-- Kotak Pembahasan Setelah Memilih Jawaban -->
+          <div id="quiz-explanation" class="hidden mt-5 p-4 rounded-xl border text-sm"></div>
+
+          <!-- Navigasi Soal -->
+          <div class="mt-6 flex items-center justify-between">
+            <span id="quiz-live-score" class="text-sm font-semibold text-slate-500">Skor sementara: 0</span>
+            <button id="quiz-next-btn" onclick="nextQuestion()" class="hidden px-5 py-2.5 rounded-xl bg-blue-700 hover:bg-blue-800 text-white font-semibold text-sm transition">
+              Soal Berikutnya →
+            </button>
+          </div>
+        </div>
+
+        <!-- Container Skor Akhir -->
+        <div id="quiz-result-screen" class="hidden text-center py-6 space-y-5">
+          <div id="result-badge-icon" class="w-20 h-20 mx-auto rounded-full flex items-center justify-center text-3xl font-extrabold"></div>
+          <div>
+            <h3 class="text-2xl font-extrabold text-slate-900">Hasil Evaluasi Kuis TKJ</h3>
+            <p id="result-subtitle" class="text-slate-600 mt-1 text-sm"></p>
+          </div>
+          <div class="inline-block bg-slate-50 border border-slate-200 rounded-2xl px-8 py-4">
+            <span class="text-xs uppercase font-bold text-slate-500 block">Nilai Akhir Anda</span>
+            <span id="final-score-value" class="text-4xl font-extrabold text-blue-700">100</span>
+            <span id="final-correct-count" class="text-xs text-slate-500 block mt-1"></span>
+          </div>
+          <div id="quiz-review-list" class="text-left space-y-3 mt-6 border-t border-slate-200 pt-5"></div>
+          <div class="pt-2">
+            <button onclick="restartQuiz()" class="px-6 py-3 rounded-xl bg-blue-700 hover:bg-blue-800 text-white font-bold text-sm shadow-sm transition">
+              Ulangi Latihan Kuis
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 py-5 px-4 text-center text-xs sm:text-sm text-slate-500">
+    <p class="font-semibold text-slate-700">Media Pembelajaran Interaktif — Jurusan Teknik Komputer &amp; Jaringan (TKJ)</p>
+    <p class="mt-0.5">SMK Banjar Asri &copy; 2026</p>
+  </footer>
+
+  <!-- Script Aplikasi Interaktif -->
+  <script>
+    // =========================================================
+    // 1. NAVIGASI TAB
+    // =========================================================
+    function switchTab(tabId, clickedBtn) {
+      // Sembunyikan semua konten tab
+      document.querySelectorAll('.tab-content').forEach(section => {
+        section.classList.add('hidden');
+      });
+
+      // Reset gaya semua tombol tab
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-blue-700', 'text-white', 'shadow-sm', 'active');
+        btn.classList.add('bg-slate-100', 'text-slate-600', 'hover:bg-slate-200');
+      });
+
+      // Tampilkan tab terpilih
+      const target = document.getElementById(tabId);
+      if (target) {
+        target.classList.remove('hidden');
+      }
+
+      // Aktifkan gaya tombol terpilih
+      clickedBtn.classList.remove('bg-slate-100', 'text-slate-600', 'hover:bg-slate-200');
+      clickedBtn.classList.add('bg-blue-700', 'text-white', 'shadow-sm', 'active');
+    }
+
+    // =========================================================
+    // 2. SIMULASI SUSUN KABEL RJ45 INTERAKTIF
+    // =========================================================
+    const WIRE_TYPES = [
+      { id: 'putih-oranye', name: 'Putih - Oranye', short: 'P-Oranye', css: 'wire-putih-oranye' },
+      { id: 'oranye',       name: 'Oranye',         short: 'Oranye',   css: 'wire-oranye' },
+      { id: 'putih-hijau',  name: 'Putih - Hijau',  short: 'P-Hijau',  css: 'wire-putih-hijau' },
+      { id: 'hijau',        name: 'Hijau',          short: 'Hijau',    css: 'wire-hijau' },
+      { id: 'putih-biru',   name: 'Putih - Biru',   short: 'P-Biru',   css: 'wire-putih-biru' },
+      { id: 'biru',         name: 'Biru',           short: 'Biru',     css: 'wire-biru' },
+      { id: 'putih-cokelat',name: 'Putih - Cokelat',short: 'P-Coklat', css: 'wire-putih-cokelat' },
+      { id: 'cokelat',      name: 'Cokelat',        short: 'Cokelat',  css: 'wire-cokelat' }
+    ];
+
+    const STANDARD_T568A = [
+      'putih-hijau', 'hijau', 'putih-oranye', 'biru',
+      'putih-biru', 'oranye', 'putih-cokelat', 'cokelat'
+    ];
+
+    const STANDARD_T568B = [
+      'putih-oranye', 'oranye', 'putih-hijau', 'biru',
+      'putih-biru', 'hijau', 'putih-cokelat', 'cokelat'
+    ];
+
+    // State 8 pin kabel RJ45 (index 0 = Pin 1, index 7 = Pin 8)
+    let currentPins = Array(8).fill(null);
+    let selectedSlotIndex = 0;
+
+    function renderSimulation() {
+      const paletteEl = document.getElementById('wire-palette');
+      const slotsEl = document.getElementById('rj45-slots');
+      const activeBadgeEl = document.getElementById('active-slot-badge');
+      const summaryEl = document.getElementById('selected-summary');
+
+      // Update indikator slot aktif
+      activeBadgeEl.textContent = `Target: Pin ${selectedSlotIndex + 1}`;
+
+      // Render Palet Warna
+      paletteEl.innerHTML = WIRE_TYPES.map(wire => {
+        const isUsed = currentPins.includes(wire.id);
+        return `
+          <button
+            type="button"
+            onclick="assignWire('${wire.id}')"
+            class="flex items-center gap-2.5 p-2.5 rounded-xl border text-left transition text-xs font-semibold
+              ${isUsed
+                ? 'bg-slate-100 border-slate-200 text-slate-400 opacity-60 hover:opacity-90'
+                : 'bg-white border-slate-300 text-slate-800 hover:border-blue-500 hover:bg-blue-50 shadow-2xs'}"
+          >
+            <span class="w-5 h-5 rounded-md border border-slate-400 shrink-0 ${wire.css}"></span>
+            <span class="truncate">${wire.name}</span>
+          </button>
+        `;
+      }).join('');
+
+      // Render 8 Slot Kabel di dalam Konektor RJ45
+      slotsEl.innerHTML = currentPins.map((wireId, idx) => {
+        const wireObj = WIRE_TYPES.find(w => w.id === wireId);
+        const isSelected = idx === selectedSlotIndex;
+        const wireClass = wireObj ? wireObj.css : 'wire-kosong';
+        const label = wireObj ? wireObj.short : 'Kosong';
+
+        return `
+          <div
+            onclick="selectPinSlot(${idx})"
+            title="Klik untuk memilih Pin ${idx + 1}"
+            class="cursor-pointer rounded-lg flex flex-col items-center justify-between py-2 px-0.5 border-2 transition select-none
+              ${isSelected ? 'border-blue-600 ring-2 ring-blue-300 scale-[1.03]' : 'border-slate-300 hover:border-blue-400'}
+              ${wireClass}"
+          >
+            <span class="bg-white/90 text-slate-900 text-[10px] font-extrabold px-1.5 rounded shadow-2xs">
+              ${idx + 1}
+            </span>
+            <span class="bg-slate-900/75 text-white text-[9px] font-semibold px-1 py-0.5 rounded [writing-mode:vertical-rl] rotate-180 tracking-tight">
+              ${label}
+            </span>
+          </div>
+        `;
+      }).join('');
+
+      // Render Ringkasan Teks Urutan Pin
+      const filledCount = currentPins.filter(Boolean).length;
+      if (filledCount === 0) {
+        summaryEl.innerHTML = `<span class="text-slate-500">Belum ada kabel yang disusun. Pilih warna kabel di sebelah kiri untuk mulai menyusun Pin 1–8.</span>`;
+      } else {
+        summaryEl.innerHTML = `
+          <div class="font-bold text-slate-800 mb-1">Urutan Pin Saat Ini (${filledCount}/8 terisi):</div>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-1 text-[11px]">
+            ${currentPins.map((wId, i) => {
+              const w = WIRE_TYPES.find(item => item.id === wId);
+              return `<div><strong>Pin ${i + 1}:</strong> ${w ? w.short : '-'}</div>`;
+            }).join('')}
+          </div>
+        `;
+      }
+    }
+
+    function selectPinSlot(index) {
+      selectedSlotIndex = index;
+      renderSimulation();
+    }
+
+    function assignWire(wireId) {
+      // Jika warna sudah dipakai di slot lain, pindahkan dari slot lama agar unik
+      const existingIdx = currentPins.indexOf(wireId);
+      if (existingIdx !== -1 && existingIdx !== selectedSlotIndex) {
+        currentPins[existingIdx] = null;
+      }
+
+      currentPins[selectedSlotIndex] = wireId;
+
+      // Otomatis pindah ke slot kosong berikutnya
+      const nextEmpty = currentPins.findIndex((val, idx) => val === null && idx > selectedSlotIndex);
+      if (nextEmpty !== -1) {
+        selectedSlotIndex = nextEmpty;
+      } else {
+        const firstEmpty = currentPins.findIndex(val => val === null);
+        if (firstEmpty !== -1) {
+          selectedSlotIndex = firstEmpty;
+        } else if (selectedSlotIndex < 7) {
+          selectedSlotIndex += 1;
+        }
+      }
+
+      // Sembunyikan kotak feedback lama saat user mengubah susunan
+      document.getElementById('sim-feedback').classList.add('hidden');
+      renderSimulation();
+    }
+
+    function resetSimulation() {
+      currentPins = Array(8).fill(null);
+      selectedSlotIndex = 0;
+      document.getElementById('sim-feedback').classList.add('hidden');
+      renderSimulation();
+    }
+
+    function autoFillStandard(type) {
+      currentPins = type === 'T568A' ? [...STANDARD_T568A] : [...STANDARD_T568B];
+      selectedSlotIndex = 0;
+      renderSimulation();
+      checkCrimpResult();
+    }
+
+    function checkCrimpResult() {
+      const feedbackEl = document.getElementById('sim-feedback');
+      feedbackEl.classList.remove('hidden', 'bg-emerald-50', 'border-emerald-300', 'text-emerald-900', 'bg-blue-50', 'border-blue-300', 'text-blue-900', 'bg-rose-50', 'border-rose-300', 'text-rose-900', 'bg-amber-50', 'border-amber-300', 'text-amber-900');
+
+      // Cek apakah semua 8 pin sudah terisi
+      if (currentPins.includes(null)) {
+        feedbackEl.classList.add('bg-amber-50', 'border-amber-300', 'text-amber-900');
+        feedbackEl.innerHTML = `
+          <div class="font-bold flex items-center gap-1.5">
+            ⚠️ Susunan Kabel Belum Lengkap
+          </div>
+          <p class="mt-1">Silakan lengkapi seluruh 8 slot pin terlebih dahulu sebelum melakukan proses crimping.</p>
+        `;
+        return;
+      }
+
+      const isT568A = currentPins.every((val, idx) => val === STANDARD_T568A[idx]);
+      const isT568B = currentPins.every((val, idx) => val === STANDARD_T568B[idx]);
+
+      if (isT568B) {
+        feedbackEl.classList.add('bg-blue-50', 'border-blue-300', 'text-blue-900');
+        feedbackEl.innerHTML = `
+          <div class="font-extrabold text-base flex items-center gap-1.5">
+            ✅ Berhasil! Sesuai Standar T568B
+          </div>
+          <p class="mt-1">
+            Urutan warna Pin 1–8 Anda (<strong>P-Oranye, Oranye, P-Hijau, Biru, P-Biru, Hijau, P-Cokelat, Cokelat</strong>) tepat sesuai standar <strong>EIA/TIA-568B</strong>. Jika kedua ujung menggunakan susunan ini, terbentuklah kabel <strong>Straight-Through</strong>.
+          </p>
+        `;
+      } else if (isT568A) {
+        feedbackEl.classList.add('bg-emerald-50', 'border-emerald-300', 'text-emerald-900');
+        feedbackEl.innerHTML = `
+          <div class="font-extrabold text-base flex items-center gap-1.5">
+            ✅ Berhasil! Sesuai Standar T568A
+          </div>
+          <p class="mt-1">
+            Urutan warna Pin 1–8 Anda (<strong>P-Hijau, Hijau, P-Oranye, Biru, P-Biru, Oranye, P-Cokelat, Cokelat</strong>) tepat sesuai standar <strong>EIA/TIA-568A</strong>. Jika dipasangkan dengan ujung T568B, terbentuklah kabel <strong>Cross-Over</strong>.
+          </p>
+        `;
+      } else {
+        // Cari pin mana saja yang salah dibandingkan standar terdekat
+        const wrongB = [];
+        currentPins.forEach((val, idx) => {
+          if (val !== STANDARD_T568B[idx]) wrongB.push(`Pin ${idx + 1}`);
+        });
+
+        feedbackEl.classList.add('bg-rose-50', 'border-rose-300', 'text-rose-900');
+        feedbackEl.innerHTML = `
+          <div class="font-extrabold text-base flex items-center gap-1.5">
+            ❌ Susunan Belum Sesuai Standar T568A maupun T568B
+          </div>
+          <p class="mt-1">
+            Jika dibandingkan dengan standar <strong>T568B</strong>, posisi yang belum tepat berada pada: <strong>${wrongB.join(', ')}</strong>. Periksa kembali tabel standar warna dan susun ulang!
+          </p>
+        `;
+      }
+    }
+
+    // =========================================================
+    // 3. LATIHAN KUIS INTERAKTIF TKJ
+    // =========================================================
+    const QUIZ_QUESTIONS = [
+      {
+        category: 'Standar Warna Kabel UTP',
+        question: 'Pada standar pengkabelan EIA/TIA-568B, warna kabel apa yang menempati posisi Pin 1 dan Pin 2?',
+        options: [
+          'Putih-Hijau dan Hijau',
+          'Putih-Oranye dan Oranye',
+          'Putih-Biru dan Biru',
+          'Putih-Cokelat dan Cokelat'
+        ],
+        correctIndex: 1,
+        explanation: 'Pada standar T568B, Pin 1 adalah Putih-Oranye dan Pin 2 adalah Oranye. Sedangkan Putih-Hijau dan Hijau berada di Pin 1 dan Pin 2 pada standar T568A.'
+      },
+      {
+        category: 'Implementasi Topologi Jaringan',
+        question: 'Seorang siswa TKJ SMK Banjar Asri ingin menghubungkan komputer (PC) di laboratorium ke port Switch menggunakan kabel UTP. Jenis susunan kabel yang paling tepat digunakan adalah...',
+        options: [
+          'Kabel Cross-Over (T568A — T568B)',
+          'Kabel Rollover (Console)',
+          'Kabel Straight-Through (T568B — T568B)',
+          'Kabel Coaxial RG-58'
+        ],
+        correctIndex: 2,
+        explanation: 'PC dan Switch merupakan dua perangkat jaringan yang berbeda jenis, sehingga dihubungkan menggunakan kabel Straight-Through (kedua ujung konektor memiliki susunan yang sama).'
+      },
+      {
+        category: 'Konsep Kabel Cross-Over',
+        question: 'Pin nomor berapa saja yang posisinya menyilang (ditukar) antara standar T568A dan standar T568B?',
+        options: [
+          'Pin 1, 2 dengan Pin 3, 6',
+          'Pin 1, 2 dengan Pin 7, 8',
+          'Pin 4, 5 dengan Pin 7, 8',
+          'Semua pin (1 sampai 8) ditukar terbalik'
+        ],
+        correctIndex: 0,
+        explanation: 'Pada kabel Cross-Over, jalur kirim data TX (Pin 1 & 2) disilangkan ke jalur terima data RX (Pin 3 & 6). Sedangkan Pin 4, 5, 7, dan 8 tetap pada posisi yang sama.'
+      },
+      {
+        category: 'Alat & Pengujian Jaringan',
+        question: 'Ketika menguji kabel Cross-Over yang baik menggunakan LAN Tester, jika lampu indikator pada Master menyala di angka 1 dan 2, maka lampu pada Remote akan menyala di angka...',
+        options: [
+          '1 dan 2',
+          '4 dan 5',
+          '3 dan 6',
+          '7 dan 8'
+        ],
+        correctIndex: 2,
+        explanation: 'Karena Pin 1 menyilang ke Pin 3 dan Pin 2 menyilang ke Pin 6, maka saat Master menyala di 1 dan 2, sisi Remote akan menyala pada indikator nomor 3 dan 6.'
+      },
+      {
+        category: 'Karakteristik Kabel UTP',
+        question: 'Apa tujuan utama pasangan kabel tembaga di dalam kabel UTP dibuat saling berpilin (twisted)?',
+        options: [
+          'Agar kabel lebih lentur dan tidak mudah putus saat ditekuk',
+          'Mengurangi gangguan interferensi elektromagnetik (EMI) dan crosstalk',
+          'Memperbesar tegangan listrik arus kuat pada jaringan',
+          'Membedakan kabel Cat5e dengan kabel fiber optik'
+        ],
+        correctIndex: 1,
+        explanation: 'Pilinan pada setiap pasangan kabel UTP berfungsi untuk saling meniadakan medan magnet sehingga meredam gangguan sinyal (crosstalk) dan interferensi elektromagnetik dari luar.'
+      }
+    ];
+
+    let currentQuestionIdx = 0;
+    let quizScore = 0;
+    let hasAnsweredCurrent = false;
+    let userAnswersLog = [];
+
+    function renderQuizQuestion() {
+      const q = QUIZ_QUESTIONS[currentQuestionIdx];
+      hasAnsweredCurrent = false;
+
+      document.getElementById('quiz-progress-badge').textContent = `Soal ${currentQuestionIdx + 1} dari ${QUIZ_QUESTIONS.length}`;
+      document.getElementById('quiz-category').textContent = q.category;
+      document.getElementById('quiz-question-text').textContent = `${currentQuestionIdx + 1}. ${q.question}`;
+      document.getElementById('quiz-live-score').textContent = `Skor sementara: ${quizScore}`;
+
+      const explanationEl = document.getElementById('quiz-explanation');
+      explanationEl.classList.add('hidden');
+      explanationEl.innerHTML = '';
+
+      const nextBtn = document.getElementById('quiz-next-btn');
+      nextBtn.classList.add('hidden');
+      nextBtn.textContent = currentQuestionIdx === QUIZ_QUESTIONS.length - 1 ? 'Lihat Nilai Akhir →' : 'Soal Berikutnya →';
+
+      const optionsListEl = document.getElementById('quiz-options-list');
+      const letters = ['A', 'B', 'C', 'D'];
+
+      optionsListEl.innerHTML = q.options.map((opt, idx) => `
+        <button
+          type="button"
+          onclick="selectQuizAnswer(${idx}, this)"
+          class="quiz-opt-btn w-full text-left p-4 rounded-xl border border-slate-200 hover:border-blue-500 hover:bg-blue-50/70 transition flex items-start gap-3 text-sm sm:text-base font-medium text-slate-800"
+        >
+          <span class="w-7 h-7 rounded-lg bg-slate-100 text-slate-700 font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">
+            ${letters[idx]}
+          </span>
+          <span>${opt}</span>
+        </button>
+      `).join('');
+    }
+
+    function selectQuizAnswer(selectedIdx, btnEl) {
+      if (hasAnsweredCurrent) return;
+      hasAnsweredCurrent = true;
+
+      const q = QUIZ_QUESTIONS[currentQuestionIdx];
+      const isCorrect = selectedIdx === q.correctIndex;
+      const allBtns = document.querySelectorAll('.quiz-opt-btn');
+
+      // Nonaktifkan semua tombol opsi dan beri warna penanda
+      allBtns.forEach((btn, idx) => {
+        btn.disabled = true;
+        btn.classList.remove('hover:border-blue-500', 'hover:bg-blue-50/70');
+
+        if (idx === q.correctIndex) {
+          btn.classList.remove('border-slate-200');
+          btn.classList.add('bg-emerald-50', 'border-emerald-500', 'text-emerald-950');
+        } else if (idx === selectedIdx && !isCorrect) {
+          btn.classList.remove('border-slate-200');
+          btn.classList.add('bg-rose-50', 'border-rose-500', 'text-rose-950');
+        } else {
+          btn.classList.add('opacity-60');
+        }
+      });
+
+      if (isCorrect) {
+        quizScore += 20;
+      }
+
+      userAnswersLog.push({
+        question: q.question,
+        chosen: q.options[selectedIdx],
+        correct: q.options[q.correctIndex],
+        isCorrect: isCorrect
+      });
+
+      document.getElementById('quiz-live-score').textContent = `Skor sementara: ${quizScore}`;
+
+      // Tampilkan pembahasan
+      const explanationEl = document.getElementById('quiz-explanation');
+      explanationEl.classList.remove('hidden', 'bg-emerald-50', 'border-emerald-200', 'text-emerald-900', 'bg-rose-50', 'border-rose-200', 'text-rose-900');
+
+      if (isCorrect) {
+        explanationEl.classList.add('bg-emerald-50', 'border-emerald-200', 'text-emerald-900');
+        explanationEl.innerHTML = `<strong>✅ Jawaban Benar!</strong><p class="mt-1">${q.explanation}</p>`;
+      } else {
+        explanationEl.classList.add('bg-rose-50', 'border-rose-200', 'text-rose-900');
+        explanationEl.innerHTML = `<strong>❌ Kurang Tepat.</strong><p class="mt-1">${q.explanation}</p>`;
+      }
+
+      document.getElementById('quiz-next-btn').classList.remove('hidden');
+    }
+
+    function nextQuestion() {
+      if (currentQuestionIdx < QUIZ_QUESTIONS.length - 1) {
+        currentQuestionIdx++;
+        renderQuizQuestion();
+      } else {
+        showQuizResults();
+      }
+    }
+
+    function showQuizResults() {
+      document.getElementById('quiz-container').classList.add('hidden');
+      const resultScreen = document.getElementById('quiz-result-screen');
+      resultScreen.classList.remove('hidden');
+
+      const correctCount = userAnswersLog.filter(item => item.isCorrect).length;
+      const badgeIcon = document.getElementById('result-badge-icon');
+      const subtitle = document.getElementById('result-subtitle');
+
+      badgeIcon.classList.remove('bg-emerald-100', 'text-emerald-700', 'bg-amber-100', 'text-amber-700', 'bg-rose-100', 'text-rose-700');
+
+      if (quizScore >= 80) {
+        badgeIcon.classList.add('bg-emerald-100', 'text-emerald-700');
+        badgeIcon.textContent = '🏆';
+        subtitle.textContent = 'Luar biasa! Anda siap melaksanakan praktik crimping kabel LAN di lab TKJ SMK Banjar Asri.';
+      } else if (quizScore >= 60) {
+        badgeIcon.classList.add('bg-amber-100', 'text-amber-700');
+        badgeIcon.textContent = '👍';
+        subtitle.textContent = 'Cukup baik! Pelajari kembali bagian yang masih keliru agar semakin mahir.';
+      } else {
+        badgeIcon.classList.add('bg-rose-100', 'text-rose-700');
+        badgeIcon.textContent = '📘';
+        subtitle.textContent = 'Tetap semangat! Silakan baca ulang materi standar warna & coba simulasi kabel sebelum mengulang kuis.';
+      }
+
+      document.getElementById('final-score-value').textContent = quizScore;
+      document.getElementById('final-correct-count').textContent = `Benar ${correctCount} dari ${QUIZ_QUESTIONS.length} soal`;
+
+      const reviewEl = document.getElementById('quiz-review-list');
+      reviewEl.innerHTML = `<h4 class="font-bold text-slate-800 text-sm mb-2">Ringkasan Jawaban Anda:</h4>` +
+        userAnswersLog.map((item, idx) => `
+          <div class="p-3.5 rounded-xl border text-xs sm:text-sm ${item.isCorrect ? 'bg-emerald-50/60 border-emerald-200' : 'bg-rose-50/60 border-rose-200'}">
+            <div class="font-bold text-slate-900">${idx + 1}. ${item.question}</div>
+            <div class="mt-1 ${item.isCorrect ? 'text-emerald-800' : 'text-rose-800'}">
+              Jawaban Anda: <strong>${item.chosen}</strong> ${item.isCorrect ? '✓' : '✗'}
+            </div>
+            ${!item.isCorrect ? `<div class="text-slate-700 mt-0.5">Kunci Jawaban: <strong>${item.correct}</strong></div>` : ''}
+          </div>
+        `).join('');
+    }
+
+    function restartQuiz() {
+      currentQuestionIdx = 0;
+      quizScore = 0;
+      userAnswersLog = [];
+      document.getElementById('quiz-result-screen').classList.add('hidden');
+      document.getElementById('quiz-container').classList.remove('hidden');
+      renderQuizQuestion();
+    }
+
+    // Inisialisasi aplikasi saat halaman dimuat
+    window.addEventListener('DOMContentLoaded', () => {
+      renderSimulation();
+      renderQuizQuestion();
+    });
+  </script>
+</body>
+</html>
+```
